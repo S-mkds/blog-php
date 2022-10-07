@@ -1,0 +1,24 @@
+# On autorise de renommer les pages
+RewriteEngine On 
+RewriteCond %{REQUEST_FILENAME} !-f
+# On peut enlever le .php et renommer les pages comme on le souhaite
+RewriteRule ^([^\.]+)$ $1.php [L]
+
+RewriteEngine On 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php 
+# On réécrit notre URL et on met [0-9]+ car on sait que dans $1 on aura que des chiffres
+RewriteRule ^voir-profil/([0-9]+)$ $voir_profil?id=$1  [L]
+
+RewriteRule ^forum$ forum/forum
+RewriteRule ^forum$ forum/forum
+
+# Insérer le fuseau horaire
+SetEnv TZ Europe/Paris 
+
+# Fichiers pour réguler les zones IP
+Order deny,allow
+Deny from .aol.com
+Deny from 192.168
+Allow from 192.168.220.102
+
