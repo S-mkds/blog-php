@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../db/connexionDB.php');
+include('../../db/connexionDB.php');
 
 // S'il n'y a pas de session alors on ne va pas sur cette page.
 if (!isset($_SESSION['id'])) {
@@ -21,17 +21,16 @@ $afficher_profil = $afficher_profil->fetch();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/style.css">
-    <link rel="icon" href="../assets/img/logo-blogybye.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="icon" href="../../assets/img/logo-blogybye.png" type="image/x-icon" />
     <title>Mon profil</title>
 
 </head>
 
 <body>
     <?php
-    require_once('navbar.php');
+    require_once('../../components/navbar.php');
     ?>
-
     <div class="mt-2 container ">
         <div class="row">
             <div class="col-0 col-sm-0 col-md-2 col-lg-3"></div>

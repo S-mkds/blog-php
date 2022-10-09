@@ -19,19 +19,10 @@ session_start();
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-        <a class="navbar-brand button-custom" href="index"><img src="./assets/img/logo-blogybye.png" width="60" />
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
         <?php
         require_once('./components/navbar-home.php');
         ?>
-        </div>
-    </nav>
 
 
     <div class="container d-flex justify-content-center ">
@@ -43,7 +34,7 @@ session_start();
             }
             ?>
             <h1>Blog'y'bye</h1>
-            <p>Bienvenue sur le blog crée en PHP & MySQL !</p>
+            <p>Bienvenue sur mon site crée en PHP & MySQL !</p>
         </div>
     </div>
 

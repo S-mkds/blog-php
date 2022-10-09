@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../db/connexionDB.php');
+include('../../db/connexionDB.php');
 
 if (!isset($_SESSION['id'])) {
     header('Location: index');
@@ -78,15 +78,15 @@ if (!empty($_POST)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/style.css">
-    <link rel="icon" href="../assets/img/logo-blogybye.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="icon" href="../../assets/img/logo-blogybye.ico" type="image/x-icon" />
     <title>Modifier votre profil</title>
 
 </head>
 
 <body>
     <?php
-    require_once('navbar.php');
+    require_once('../../components/navbar.php');
     ?>
 
     <section class="container">

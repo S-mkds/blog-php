@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
-    <a class="navbar-brand button-custom" href="../index"><img src="../assets/img/logo-blogybye.png" width="60" /></a>
+    <a class="navbar-brand button-custom" href="../../../index"><img src="../../assets/img/logo-blogybye.png" width="60" /></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -14,7 +14,7 @@
             
             <li class="nav-item">
                 <a class="button-custom nav-link nav-link bg-success bg-gradient p-2 m-1 rounded-bottom"
-                    href="forum">Forum</a>
+                    href="../../views/_forum/forum">Forum</a>
             </li>
             <?php
             }
@@ -27,7 +27,7 @@
             
             <li class="nav-item">
                 <a class="button-custom nav-link nav-link bg-success bg-gradient p-2 m-1 rounded-bottom"
-                    href="blog">Blog</a>
+                    href="../../views/_blog/blog">Blog</a>
             </li>
             <?php
             }
@@ -39,7 +39,7 @@
             ?>
             <li class="nav-item">
                 <a class="button-custom nav-link nav-link bg-success bg-gradient p-2 m-1 rounded-bottom"
-                    href="profil">Mon profil</a>
+                    href="../../views/_profil/profil">Mon profil</a>
             </li>
             <?php
             }
@@ -52,7 +52,7 @@
             
             <li class="nav-item">
                 <a class="button-custom nav-link nav-link bg-success bg-gradient p-2 m-1 rounded-bottom"
-                    href="modifier-profil">Modifier Profil</a>
+                    href="../../views/_profil/modifier-profil">Modifier Profil</a>
             </li>
             <?php
             }
@@ -64,7 +64,7 @@
             ?>
             <li class="nav-item">
                 <a class="button-custom nav-link nav-link bg-success bg-gradient p-2 m-1 rounded-bottom"
-                    href="utilisateur">Membres</a>
+                    href="../../views/_profil/utilisateur">Membres</a>
             </li>
             <?php
             }
@@ -76,18 +76,18 @@
             ?>
             <li class="nav-item">
                 <a class="button-custom nav-link bg-success bg-gradient p-2 m-1 rounded-bottom"
-                    href="inscription">Inscription</a>
+                    href="../../components/inscription">Inscription</a>
             </li>
             <li class="nav-item">
                 <a class="button-custom nav-link bg-success bg-gradient p-2 m-1 rounded-bottom"
-                    href="connexion">Connexion</a>
+                    href="../../components/connexion">Connexion</a>
             </li>
             <?php
             } else {
             ?>
             <li class="nav-item">
                 <a class="button-custom nav-link bg-success bg-gradient p-2 m-1 rounded-bottom"
-                    href="deconnexion">Déconnexion</a>
+                    href="../../components/deconnexion">Déconnexion</a>
             </li>
             <?php
             }
