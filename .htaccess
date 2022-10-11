@@ -8,7 +8,7 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php 
 # Règle d'accès au profil, On réécrit notre URL et on met [0-9]+ car on sait que dans $1 on aura que des chiffres
-RewriteRule ^voir-profil/([0-9]+)$ $voir_profil?id=$1  [L]
+RewriteRule ^voir-profil/([0-9]+)$ $voir_profil?id=$2  [L]
 
 # Règle d'accès au forum
 RewriteRule ^forum$ views/forum/

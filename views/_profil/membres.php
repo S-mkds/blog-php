@@ -23,12 +23,9 @@
 <!doctype html>
 <html lang="fr">
 	<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../assets/style.css">
-    <link rel="icon" href="../../assets/img/logo-blogybye.ico" type="image/x-icon" />
+		<?php	
+			require_once('../../components/header/head.php');
+		?>
 		<title>Membres</title>
 	</head>
 	<body>
@@ -46,19 +43,19 @@
 						$chemin_avatar = null;
 							
 						if(isset($rm['avatar'])){
-							$chemin_avatar = '../public/avatar/' . $rm['id'] . '/' . $rm['avatar'];
+							$chemin_avatar = '../../assets/public/avatar/' . $rm['id'] . '/' . $rm['avatar'];
 						}else{
-							$chemin_avatar = '../public/avatar/defaut/defaut.svg';
+							$chemin_avatar = '../../assets/public/avatar/defaut/defaut.svg';
 						}
 						
 				?>
 				<div class="col-3">
 					<div><?= $rm['pseudo'] ?></div>
 					<div>
-						<img src="<?= $chemin_avatar ?>" class="profil__avatar"/>
+						<img src="<?= $chemin_avatar ?>" style="width: 7rem" class="profil__avatar"/>
 					</div>
 					<div>
-						<a href="_profil/voir-profil.php?id=<?= $rm['id'] ?>">Voir profil</a>
+						<a href="voir-profil.php?id=<?= $rm['id'] ?>">Voir profil</a>
 					</div>
 				</div>
 				<?php		

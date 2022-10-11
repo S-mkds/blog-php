@@ -13,7 +13,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="icon" href="./assets/img/logo-blogybye.ico" type="image/x-icon" />
     <title>Accueil</title>
 </head>
@@ -23,7 +23,6 @@ session_start();
         <?php
         require_once('./components/menu/navbar-home.php');
         ?>
-
 
     <div class="container d-flex justify-content-center ">
         <div class="bg-success p-2 mt-2 rounded">

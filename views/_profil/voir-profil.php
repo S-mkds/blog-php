@@ -47,9 +47,9 @@
 	$chemin_avatar = null;
 		
 	if(isset($req_user['avatar'])){
-		$chemin_avatar = '../public/avatar/' . $req_user['id'] . '/' . $req_user['avatar'];
+		$chemin_avatar = '../../assets/public/avatar/' . $req_user['id'] . '/' . $req_user['avatar'];
 	}else{
-		$chemin_avatar = '../public/avatar/defaut/defaut.svg';
+		$chemin_avatar = '../../assets/public/avatar/defaut/defaut.svg';
 	}
 	
 ?>
@@ -57,12 +57,9 @@
 <html lang="fr">
 	<head>
 	<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../assets/style.css">
-    <link rel="icon" href="../../assets/img/logo-blogybye.ico" type="image/x-icon" />
+		<?php	
+			require_once('../../components/header/head.php');
+		?>
 		<title>Profil de <?= $req_user['pseudo'] ?></title>
 	</head>
 	<body>
@@ -72,9 +69,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
-					<h1>Bonjour <?= $req_user['pseudo'] ?></h1>
+					<h1>Voici le profil de : <?= $req_user['pseudo'] ?></h1>
 					<div>
-						<img src="<?= $chemin_avatar ?>" class="profil__avatar"/>
+						<img src="<?= $chemin_avatar ?>" style="width: 7rem" class="profil__avatar"/>
 					</div>
 					<div>
 						Date d'inscription : Le <?= $date_inscription ?>
