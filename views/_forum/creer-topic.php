@@ -92,7 +92,6 @@
 		<title>Créer un topic</title>
 	</head>
 	<body>
-
 		<?php	
 			require_once('../../components/menu/navbar.php');
 		?>

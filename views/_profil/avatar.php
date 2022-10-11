@@ -30,7 +30,7 @@
 					$extensionUpload = strtolower(substr(strrchr($_FILES['file']['name'], '.'), 1));
 					
 					if(in_array($extensionUpload, $extensionsValides)){
-						$dossier = '../public/avatar/' . $_SESSION['id'] . '/';
+						$dossier = '../../assets/public/avatar/' . $_SESSION['id'] . '/';
 						
 						if(!is_dir($dossier)){
 							mkdir($dossier);

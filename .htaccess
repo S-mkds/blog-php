@@ -16,7 +16,6 @@ RewriteRule ^sujet/([0-9]+)$ $sujet?id=$1
 RewriteRule ^topic/([0-9]+)/([0-9]+)$ $topic?id_forum=$1&id_topic=$2
 RewriteRule ^forum/([0-9]+)/([0-9]+)$ _forum/topic?id_forum=$1&id_topic=$2 [L]
 
-
 # Règle d'accès au blog
 RewriteRule ^blog$ blog-views/blog
 
@@ -28,7 +27,6 @@ Order deny,allow
 Deny from .aol.com
 Deny from 192.168
 Allow from 192.168.220.102
-
 
 # EXAMPLE 
 RewriteRule ^forum/([0-9]+)/([0-9]+)$ f_forum/topic?id_forum=$1&id_topic=$2

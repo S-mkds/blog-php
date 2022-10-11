@@ -74,12 +74,9 @@ if (!empty($_POST)) {
 <html lang="fr">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/style.css">
-    <link rel="icon" href="../assets/img/logo-blogybye.ico" type="image/x-icon" />
+<?php	
+			require_once('header/head.php');
+		?>
     <title>Mot de passe oublié</title>
 </head>
 
