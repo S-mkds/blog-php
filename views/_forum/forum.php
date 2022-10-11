@@ -54,7 +54,7 @@
 									$lib_nb_topic = "Il y a " . $nb_topic . ' topic';
 								}
 						?>
-						<a href="_forum/liste-topics.php?id=<?= $rf['id'] ?>" class="list__link__forum">
+						<a href="liste-topics.php?id=<?= $rf['id'] ?>" class="list__link__forum">
 							<div class="list__cat__forum">
 								<div><?= $rf['titre'] ?></div>
 								<div class="list__footer__forum">
@@ -66,7 +66,7 @@
 						</a>
 						<?php		
 							}
-				 		 ?>
+				 		?>
 					</div>
 				</div>
 			</div>

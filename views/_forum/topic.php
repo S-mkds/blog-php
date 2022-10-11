@@ -155,7 +155,7 @@
 								</form>
 							</div>
 							<div>
-								<a href="_forum/editer-topic.php?id=<?= $req_topic['id'] ?>" class="topic__action__btn">
+								<a href="editer-topic.php?id=<?= $req_topic['id'] ?>" class="topic__action__btn">
 									<i class="bi bi-pencil btn__edit"></i> Éditer mon topic
 								</a>
 							</div>
@@ -235,7 +235,7 @@
 								</form>
 							</div>
 							<div>
-								<a href="_forum/editer-commentaire.php?id=<?= $rtc['id'] ?>" class="topic__action__btn">
+								<a href="editer-commentaire.php?id=<?= $rtc['id'] ?>" class="topic__action__btn">
 									<i class="bi bi-pencil btn__edit"></i> Éditer mon commentaire
 								</a>
 							</div>

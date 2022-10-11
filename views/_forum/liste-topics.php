@@ -66,7 +66,7 @@
 								$nb_commentaire = $req_nb_commentaire['NbCommentaire'];
 								
 						?>
-						<a href="_forum/topic.php?id=<?= $rlt['id'] ?>" class="list__topic__link">
+						<a href="topic.php?id=<?= $rlt['id'] ?>" class="list__topic__link">
 							<div class="list__topic__sujet">
 								<div><?= $rlt['titre'] ?></div>
 								<div class="list__topic__footer">
