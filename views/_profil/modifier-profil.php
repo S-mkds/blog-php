@@ -1,152 +1,181 @@
 <?php
-session_start();
-include('../../db/connexionDB.php');
 
-if (!isset($_SESSION['id'])) {
-    header('Location: index');
-    exit;
-}
+	require_once('../../include.php');
 
-// On récupère les informations de l'utilisateur connecté
-$afficher_profil = $DB->query(
-    "SELECT * FROM utilisateur WHERE id = ?",
-    array($_SESSION['id'])
-);
-$afficher_profil = $afficher_profil->fetch();
+	if(!isset($_SESSION['id'])){
+		header('Location: /');
+		exit;
+	}
 
-if (!empty($_POST)) {
-    extract($_POST);
-    $valid = true;
-
-    if (isset($_POST['modification'])) {
-        $nom = htmlentities(trim($nom));
-        $prenom = htmlentities(trim($prenom));
-        $mail = htmlentities(strtolower(trim($mail)));
-
-        if (empty($nom)) {
-            $valid = false;
-            $er_nom = "Il faut mettre un nom";
-        }
-
-        if (empty($prenom)) {
-            $valid = false;
-            $er_prenom = "Il faut mettre un prénom";
-        }
-
-        if (empty($mail)) {
-            $valid = false;
-            $er_mail = "Il faut mettre un mail";
-        } elseif (!preg_match("/^[a-z0-9\-_.]+@[a-z]+\.[a-z]{2,3}$/i", $mail)) {
-            $valid = false;
-            $er_mail = "Le mail n'est pas valide";
-        } else {
-            $req_mail = $DB->query(
-                "SELECT mail FROM utilisateur WHERE mail = ?",
-                array($mail)
-            );
-            $req_mail = $req_mail->fetch();
-
-            if ($req_mail['mail'] <> "" && $_SESSION['mail'] != $req_mail['mail']) {
-                $valid = false;
-                $er_mail = "Ce mail existe déjà";
-            }
-        }
-
-        if ($valid) {
-            $DB->insert(
-                "UPDATE utilisateur SET prenom = ?, nom = ?, mail = ? WHERE id = ?",
-                array($prenom, $nom, $mail, $_SESSION['id'])
-            );
-
-            $_SESSION['nom'] = $nom;
-            $_SESSION['prenom'] = $prenom;
-            $_SESSION['mail'] = $mail;
-
-            header('Location: profil');
-            exit;
-        }
-    }
-}
+	$req = $DB->prepare("SELECT *
+		FROM utilisateur
+		WHERE id = ?");
+	
+	$req->execute([$_SESSION['id']]);
+	
+	$req_user = $req->fetch();
+	
+	
+	if(!empty($_POST)){
+		extract($_POST);
+		
+		$valid = true;
+		
+		if(isset($_POST['form1'])){
+			$mail = (String) trim($mail);
+			
+			if($mail == $_SESSION['mail']){
+				$valid = false;
+				
+			}elseif(!isset($mail)){
+				$valid = false;
+				$err_mail = "Ce champ ne peut pas être vide";
+				
+			}elseif(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
+				$valid = false;
+				$err_mail = "Format invalide pour ce mail";
+				
+			}else{
+				$req = $DB->prepare("SELECT id 
+					FROM utilisateur
+					WHERE mail = ?");
+					
+				$req->execute([$mail]);
+				
+				$req = $req->fetch();
+				
+				if(isset($req['id'])){
+					$valid = false;
+					$err_mail = "Ce mail est déjà pris";
+				}
+			}
+						
+			if($valid){
+				
+				$req = $DB->prepare('UPDATE utilisateur SET mail = ? WHERE id = ?');
+				$req->execute([$mail, $_SESSION['id']]);
+				
+				$_SESSION['mail'] = $mail;
+				
+				header('Location: modifier-profil.php');
+				exit;
+			}
+			
+		}elseif(isset($_POST['form2'])){
+			$oldpsd = (String) trim($oldpsd);
+			$psd = (String) trim($psd);
+			$confpsd = (String) trim($confpsd);
+			
+			if(!isset($oldpsd)){
+				$valid = false;
+				$err_password = "Ce champ ne peut pas être vide";
+			
+			}else{
+				$req = $DB->prepare("SELECT mdp
+					FROM utilisateur
+					WHERE id = ?");
+					
+				$req->execute([$_SESSION['id']]);
+				
+				$req = $req->fetch();
+				
+				if(isset($req['mdp'])){
+					if(!password_verify($oldpsd, $req['mdp'])) {
+						$valid = false;
+						$err_password = "L'ancien mot passe est incorrecte";
+					}
+					
+				}else{
+					$valid = false;
+					$err_password = "L'ancien mot passe est incorrecte";
+				}
+			}
+			
+			
+			if($valid){
+				if(empty($psd)){
+					$valid = false;
+					$err_password = "Ce champ ne peut pas être vide";
+				
+				}elseif($psd <> $confpsd){
+					$valid = false;
+					$err_password = "Le mot de passe est différent de la confirmation";
+				
+				}elseif($psd == $oldpsd){
+					$valid = false;
+					$err_password = "Le mot de passe doit être différent de l'ancien";
+				}
+			}
+			
+			
+			if($valid){
+				$crytp_password = password_hash($psd, PASSWORD_ARGON2ID);
+				
+				$req = $DB->prepare('UPDATE utilisateur SET mdp = ? WHERE id = ?');
+				$req->execute([$crytp_password, $_SESSION['id']]);
+				
+				header('Location: modifier-profil.php');
+				exit;
+			}
+			
+		}
+	}	
+	
+	if(!isset($mail)){
+		$mail = $req_user['mail'];
+	}
+	
+	
 ?>
-
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-
-<head>
+	<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/style.css">
     <link rel="icon" href="../../assets/img/logo-blogybye.ico" type="image/x-icon" />
-    <title>Modifier votre profil</title>
+		<title>Modifier mon compte</title>
+	</head>
+	<body>
+		<?php	
+			require_once('../../components/menu/navbar.php');
+		?>
+		<div class="container">
+			<div class="row">
+				<div class="col-3"></div>
+				<div class="col-6">
+					<h1>Modifier mes informations</h1>
+					
+					<form method="post">
+						<div class="mb-3">
+							<?php if(isset($err_mail)){ echo '<div>' . $err_mail . '</div>'; }?>
+							<input class="form-control" type="email" name="mail" value="<?= $mail ?>" placeholder="Mail"/>
+						</div>
+						<div class="mb-3">
+							<input class="btn btn-primary" type="submit" name="form1" value="Modifier"/>
+						</div>
+					</form>
+					<br>
+					<form method="post">
+						<div class="mb-3">
+							<?php if(isset($err_password)){ echo '<div>' . $err_password . '</div>'; }?>
+							<input class="form-control" type="password" name="oldpsd" value="" placeholder="Mot de passe actuel"/>
+						</div>
+						<div class="mb-3">
+							<input class="form-control" type="password" name="psd" value="" placeholder="Nouveau mot de passe"/>
+						</div>
+						<div class="mb-3">
+							<input class="form-control" type="password" name="confpsd" value="" placeholder="Confirmation du mot de passe"/>
+						</div>
+						<div class="mb-3">
+							<input class="btn btn-primary" type="submit" name="form2" value="Modifier"/>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 
-</head>
-
-<body>
-    <?php
-    require_once('../../components/navbar.php');
-    ?>
-
-    <section class="container">
-        <h4 class="button-custom">Modifier le profil</h4>
-        <form method="post">
-
-            <!-- Nom input -->
-            <?php
-            if (isset($er_nom)) {
-            ?>
-            <div><?= $er_nom ?></div>
-            <?php
-            }
-            ?>
-            <input class="form-control" type="text" placeholder="Votre nom" name="nom" value="<?php if (isset($nom)) {
-                                                                                                    echo $nom;
-                                                                                                } else {
-                                                                                                    echo $afficher_profil['nom'];
-                                                                                                } ?>" required>
-            <label class="form-label button-custom">Nom</label>
-
-            <!-- Prénom input -->
-            <?php
-            if (isset($er_prenom)) {
-            ?>
-            <div><?= $er_prenom ?></div>
-            <?php
-            }
-            ?> <input class="form-control" type="text" placeholder="Votre prénom" name="prenom" value="<?php if (isset($prenom)) {
-                                                                                                            echo $prenom;
-                                                                                                        } else {
-                                                                                                            echo $afficher_profil['prenom'];
-                                                                                                        } ?>" required>
-            <label class="form-label button-custom">Prénom</label>
-
-            <!-- Email input -->
-            <?php
-            if (isset($er_mail)) {
-            ?>
-            <div><?= $er_mail ?></div>
-            <?php
-            }
-            ?>
-            <input class="form-control" type="email" placeholder="Adresse mail" name="mail" value="<?php if (isset($mail)) {
-                                                                                                        echo $mail;
-                                                                                                    } else {
-                                                                                                        echo $afficher_profil['mail'];
-                                                                                                    } ?>" required>
-            <label class="form-label button-custom">Email</label>
-
-            <!-- Send input -->
-            <br>
-            <button type="submit" name="modification" class="btn btn-outline-light btn-lg px-5">Modifier</button>
-
-        </form>
-    </section>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</body>
-
+	</body>
 </html>

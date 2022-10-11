@@ -1,62 +1,93 @@
 <?php
-session_start();
-include('../../db/connexionDB.php');
 
-if (!isset($_SESSION['id'])) {
-    header('Location: index');
-    exit;
-}
+	require_once('../../include.php');
 
-// Récupèration de l'id passer en argument dans l'URL
-$id = (int) $_GET['id'];
-// On récupère les informations de l'utilisateur grâce à son ID
-$afficher_profil = $DB->query("SELECT * 
-    FROM utilisateur 
-    WHERE id = ?", array($id));
-$afficher_profil = $afficher_profil->fetch();
+	$get_id = (int) $_GET['id'];
+	
+	if($get_id <= 0){
+		header('Location: membres.php');
+		exit;
+	}
+	
+	if(isset($_SESSION['id']) && $get_id == $_SESSION['id']){
+		header('Location: profil.php');
+		exit;
+	}
 
-if (!isset($afficher_profil['id'])) {
-    header('Location: index');
-    exit;
-}
+	$req = $DB->prepare("SELECT *
+		FROM utilisateur
+		WHERE id = ?");
+	
+	$req->execute([$get_id]);
+	
+	$req_user = $req->fetch();
+	
+	
+	$date = date_create($req_user['date_creation']);
+	$date_inscription =  date_format($date, 'd/m/Y');
+	
+	$date = date_create($req_user['date_connexion']);
+	$date_connexion =  date_format($date, 'd/m/Y à H:i');
+	
+	switch($req_user['role']){
+		case 0:
+			$role = "Utilisateur";
+		break;
+		case 1:
+			$role = "Super Admin";
+		break;
+		case 2:
+			$role = "Admin";
+		break;
+		case 3:
+			$role = "Modérateur";
+		break;
+	}
+	
+	$chemin_avatar = null;
+		
+	if(isset($req_user['avatar'])){
+		$chemin_avatar = '../public/avatar/' . $req_user['id'] . '/' . $req_user['avatar'];
+	}else{
+		$chemin_avatar = '../public/avatar/defaut/defaut.svg';
+	}
+	
 ?>
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
+	<head>
+	<head>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/style.css">
     <link rel="icon" href="../../assets/img/logo-blogybye.ico" type="image/x-icon" />
+		<title>Profil de <?= $req_user['pseudo'] ?></title>
+	</head>
+	<body>
+		<?php	
+			require_once('../../components/menu/navbar.php');
+		?>
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h1>Bonjour <?= $req_user['pseudo'] ?></h1>
+					<div>
+						<img src="<?= $chemin_avatar ?>" class="profil__avatar"/>
+					</div>
+					<div>
+						Date d'inscription : Le <?= $date_inscription ?>
+					</div>
+					<div> 
+						Date de dernière connexion : Le <?= $date_connexion ?>
+					</div>
+					<div> 
+						Rôle utilisateur : <?= $role ?>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <title>Profil-membre</title>
-</head>
-
-<body>
-
-    <?php
-    require_once('../../components/navbar.php');
-    ?>
-
-    <div class="d-flex justify-content-center mt-5">
-        <div class="bg-info rounded p-4">
-            <h2>Voici le profil de <?= $afficher_profil['nom'] . " " . $afficher_profil['prenom']; ?></h2>
-            <div>Quelques informations sur lui : </div>
-            <ul>
-                <li><strong>L'ID : </strong><em><?= $afficher_profil['id'] ?></em></li>
-                <li><strong>L'email :</strong><em> <?= $afficher_profil['mail'] ?></em></li>
-                <li><strong>Le compte a été crée le : </strong><em><?= $afficher_profil['date_creation_compte'] ?></em>
-                </li>
-            </ul>
-
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        </div>
-    </div>
-</body>
-
+	</body>
 </html>

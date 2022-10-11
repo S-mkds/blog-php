@@ -19,7 +19,7 @@
             <?php
             }
             ?>
-                        <?php
+            <?php
             if (!isset($_SESSION['id'])) {
                 // ...
             } else {
@@ -39,20 +39,7 @@
             ?>
             <li class="nav-item">
                 <a class="button-custom nav-link nav-link bg-success bg-gradient p-2 m-1 rounded-bottom"
-                    href="../../views/_profil/profil">Mon profil</a>
-            </li>
-            <?php
-            }
-            ?>
-            <?php
-            if (!isset($_SESSION['id'])) {
-                // ...
-            } else {
-            ?>
-            
-            <li class="nav-item">
-                <a class="button-custom nav-link nav-link bg-success bg-gradient p-2 m-1 rounded-bottom"
-                    href="../../views/_profil/modifier-profil">Modifier Profil</a>
+                    href="../../views/_profil/profil">Profil</a>
             </li>
             <?php
             }
@@ -64,7 +51,7 @@
             ?>
             <li class="nav-item">
                 <a class="button-custom nav-link nav-link bg-success bg-gradient p-2 m-1 rounded-bottom"
-                    href="../../views/_profil/utilisateur">Membres</a>
+                    href="../../views/_profil/membres">Membres</a>
             </li>
             <?php
             }
@@ -80,7 +67,7 @@
             </li>
             <li class="nav-item">
                 <a class="button-custom nav-link bg-success bg-gradient p-2 m-1 rounded-bottom"
-                    href="../../components/connexion">Connexion</a>
+                    href="../../components/inscription">Connexion</a>
             </li>
             <?php
             } else {

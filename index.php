@@ -21,16 +21,21 @@ session_start();
 <body>
 
         <?php
-        require_once('./components/navbar-home.php');
+        require_once('./components/menu/navbar-home.php');
         ?>
 
 
     <div class="container d-flex justify-content-center ">
         <div class="bg-success p-2 mt-2 rounded">
+        <?php
+            if (isset($_SESSION['id'])) {
+                echo ' Bonjour ' . $_SESSION['pseudo'] ;
+            }
+            ?>
+            <br>
             <?php
             if (isset($_SESSION['id'])) {
-                echo 'ID : ' . $_SESSION['id'] . ', Nom : ' . $_SESSION['nom'] . ", prénom : " .
-                    $_SESSION['prenom'] . ", mail : " . $_SESSION['mail'];
+                echo 'ID : ' . $_SESSION['id'] . ", Email : " . $_SESSION['mail'];
             }
             ?>
             <h1>Blog'y'bye</h1>

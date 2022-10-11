@@ -1,6 +1,5 @@
 <?php
-session_start();
-  include('../../db/connexionDB.php'); // Fichier PHP contenant la connexion à votre BDD
+	require_once('../../include.php');
 
 ?>
 
@@ -16,9 +15,9 @@ session_start();
 
 <body>
 
-<?php
-    require_once('../../components/navbar.php');
-    ?>
+        <?php	
+			require_once('../../components/menu/navbar.php');
+		?>
 
 
     <div class="container ">
