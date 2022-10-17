@@ -9,12 +9,9 @@ session_start();
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/new-style.css">
-    <link rel="icon" href="./assets/img/logo-blogybye.ico" type="image/x-icon" />
+        <?php
+        require_once('./components/header/head.php');
+        ?>
     <title>Accueil</title>
 </head>
 
@@ -25,7 +22,7 @@ session_start();
         ?>
 
     <div class="container d-flex justify-content-center ">
-        <div class="bg-success p-2 mt-2 rounded">
+        <div class="bg-info p-2 mt-2 rounded">
         <?php
             if (isset($_SESSION['id'])) {
                 echo ' Bonjour ' . $_SESSION['pseudo'] ;
@@ -38,13 +35,12 @@ session_start();
             }
             ?>
             <h1>Blog'y'bye</h1>
-            <p>Bienvenue sur mon site crée en PHP & MySQL !</p>
+            <p>Bienvenue chez Blog'y'Bye le blog / forum 🚀 !</p>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
-<footer></footer>
+        <?php
+        require_once('./views/_footer/footer.php');
+        ?>
 </html>

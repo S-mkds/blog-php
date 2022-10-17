@@ -71,7 +71,7 @@
 				<div class="col-12">
 					<h1>Voici le profil de : <?= $req_user['pseudo'] ?></h1>
 					<div>
-						<img src="<?= $chemin_avatar ?>" style="width: 7rem" class="profil__avatar"/>
+						<img src="<?= $chemin_avatar ?>" style="width: 10rem" class="profil__avatar"/>
 					</div>
 					<div>
 						Date d'inscription : Le <?= $date_inscription ?>
@@ -87,4 +87,7 @@
 		</div>
 
 	</body>
+	<?php
+        require_once('../_footer/footer.php');
+        ?>
 </html>

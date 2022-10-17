@@ -63,7 +63,7 @@
 				<div class="col-12">
 					<h1>Bonjour <?= $req_user['pseudo'] ?></h1>
 					<div class="profil__avatar">
-						<img src="<?= $chemin_avatar ?>" class="profil__avatar" style="width: 7rem"/>
+						<img src="<?= $chemin_avatar ?>" class="profil__avatar" style="width: 10rem"/>
 					</div>
 					<div>
 						Date d'inscription : Le <?= $date_inscription ?>
@@ -85,4 +85,7 @@
 		</div>
 
 	</body>
+	<?php
+        require_once('../_footer/footer.php');
+        ?>
 </html>

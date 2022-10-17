@@ -19,10 +19,10 @@
 		exit;
 	}
 	
-	$req = $DB->prepare("SELECT t.*, f.titre AS titre_blog
-		FROM article t
-		INNER JOIN blog f ON f.id = t.id_blog
-		WHERE t.id = ?");
+	$req = $DB->prepare("SELECT a.*, b.titre AS titre_blog
+		FROM article a
+		INNER JOIN blog b ON b.id = a.id_blog
+		WHERE a.id = ?");
 		
 	$req->execute([$get_id_article]);
 	
@@ -174,4 +174,7 @@
 		</div>
 
 	</body>
+	<?php
+        require_once('../_footer/footer.php');
+        ?>
 </html>

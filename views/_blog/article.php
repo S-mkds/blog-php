@@ -14,12 +14,12 @@
 		exit;
 	}
 	
-	$req = $DB->prepare("SELECT t.*, u.pseudo, f.titre AS titre_blog
-		FROM article t
-		INNER JOIN utilisateur u ON u.id = t.id_utilisateur
-		INNER JOIN blog f ON f.id = t.id_blog
-		WHERE t.id = ?
-		ORDER BY t.date_creation DESC");
+	$req = $DB->prepare("SELECT a.*, u.pseudo, b.titre AS titre_blog
+		FROM article a
+		INNER JOIN utilisateur u ON u.id = a.id_utilisateur
+		INNER JOIN blog b ON b.id = a.id_blog
+		WHERE a.id = ?
+		ORDER BY a.date_creation DESC");
 	
 	$req->execute([$get_id_article]);
 	
@@ -31,11 +31,11 @@
 	}
 	
 	
-	$req = $DB->prepare("SELECT tc.*, u.pseudo
-		FROM article_commentaire tc
-		INNER JOIN utilisateur u ON u.id = tc.id_utilisateur
-		WHERE tc.id_article = ?
-		ORDER BY tc.date_creation DESC");
+	$req = $DB->prepare("SELECT ac.*, u.pseudo
+		FROM article_commentaire ac
+		INNER JOIN utilisateur u ON u.id = ac.id_utilisateur
+		WHERE ac.id_article = ?
+		ORDER BY ac.date_creation DESC");
 		
 	$req->execute([$req_article['id']]);
 	
@@ -149,13 +149,13 @@
 						<div class="topic__body__action__btn">
 							<div>
 								<form method="post">
-									<button type="submit" name="supp-topic" class="topic__action__btn">
+									<button type="submit" name="supp-article" class="topic__action__btn">
 										<i class="bi bi-trash2 btn__trash"></i> Supprimer mon poste
 									</button>
 								</form>
 							</div>
 							<div>
-								<a href="editer-topic.php?id=<?= $req_article['id'] ?>" class="topic__action__btn">
+								<a href="editer-article.php?id=<?= $req_article['id'] ?>" class="topic__action__btn">
 									<i class="bi bi-pencil btn__edit"></i> Éditer mon blog
 								</a>
 							</div>
@@ -235,7 +235,7 @@
 								</form>
 							</div>
 							<div>
-								<a href="editer-commentaire.php?id=<?= $rtc['id'] ?>" class="topic__action__btn">
+								<a href="editer-article-commentaire.php?id=<?= $rtc['id'] ?>" class="topic__action__btn">
 									<i class="bi bi-pencil btn__edit"></i> Éditer mon commentaire
 								</a>
 							</div>
@@ -264,4 +264,7 @@
 		</div>
 
 	</body>
+	<?php
+        require_once('../_footer/footer.php');
+        ?>
 </html>

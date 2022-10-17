@@ -23,11 +23,11 @@
 	
 	$req_blog = $req->fetch();
 	
-	$req = $DB->prepare("SELECT T.*, U.pseudo
-		FROM article T
-		INNER JOIN utilisateur U ON U.id = T.id_utilisateur
-		WHERE T.id_blog = ?
-		ORDER BY T.date_creation DESC");
+	$req = $DB->prepare("SELECT A.*, U.pseudo
+		FROM article A
+		INNER JOIN utilisateur U ON U.id = A.id_utilisateur
+		WHERE A.id_blog = ?
+		ORDER BY A.date_creation DESC");
 	
 	$req->execute([$get_id_blog]);
 	
@@ -40,7 +40,7 @@
 		<?php	
 			require_once('../../components/header/head.php');
 		?>
-		<title>Forum - <?= $req_blog['titre'] ?></title>
+		<title>blog - <?= $req_blog['titre'] ?></title>
 	</head>
 	<body>
 		<?php	
@@ -53,13 +53,13 @@
 					<div class="list__topic__body">
 						<h1 class="list__topic__h1"><?= $req_blog['titre'] ?></h1>
 						<?php
-							foreach($req_liste_articles as $rlt){
+							foreach($req_liste_articles as $rla){
 								
 								$req = $DB->prepare("SELECT COUNT(id) AS NbCommentaire
 									FROM article_commentaire
 									WHERE id_article = ?");
 								
-								$req->execute([$rlt['id']]);
+								$req->execute([$rla['id']]);
 								
 								$req_nb_commentaire = $req->fetch();
 								
@@ -68,13 +68,13 @@
 						?>
 
 					
-						<a href="article.php?id=<?= $rlt['id'] ?>" class="list__topic__link">
+						<a href="article.php?id=<?= $rla['id'] ?>" class="list__topic__link">
 							<div class="list__topic__sujet">
-								<div><?= $rlt['titre'] ?></div>
+								<div><?= $rla['titre'] ?></div>
 								<div class="list__topic__footer">
-									<div><?= $rlt['pseudo'] ?></div>
+									<div><?= $rla['pseudo'] ?></div>
 									<div><i class="bi bi-chat"></i> <?= $nb_commentaire ?></div>
-									<div>Le <?= date_format(date_create($rlt['date_creation']), 'd/m/Y à H:i') ?></div>
+									<div>Le <?= date_format(date_create($rla['date_creation']), 'd/m/Y à H:i') ?></div>
 								</div>
 							</div>
 							</a>
@@ -89,4 +89,7 @@
 		</div>
 
 	</body>
+	<?php
+        require_once('../_footer/footer.php');
+        ?>
 </html>

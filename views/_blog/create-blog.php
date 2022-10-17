@@ -19,7 +19,7 @@
 		
 		$valid = true;	
 		
-		if(isset($_POST['creation'])){
+		if(isset($_POST['create-blog'])){
 			
 			$titre = (String) ucfirst(trim($titre));
 			$categorie = (int) $categorie;
@@ -64,7 +64,7 @@
 				
 				$date_creation = date('Y-m-d H:i:s');
 				
-				$req = $DB->prepare("INSERT INTO blog (id_blog, titre, contenu, date_creation, date_modification, id_utilisateur) VALUES (?, ?, ?, ?, ?, ?)");	
+				$req = $DB->prepare("INSERT INTO article (id_blog, titre, contenu, date_creation, date_modification, id_utilisateur) VALUES (?, ?, ?, ?, ?, ?)");	
 				
 				$req->execute([$req_blog_verif['id'], $titre, $contenu, $date_creation, $date_creation, $_SESSION['id']]);
 				
@@ -136,7 +136,7 @@
 							<textarea class="form-control" type="text" name="contenu" placeholder="Votre blog ..."><?php if(isset($contenu)){ echo $contenu; }?></textarea>
 						</div>
 						<div class="mb-3">
-							<button type="submit" name="creation" class="btn btn-primary">Créer mon blog</button>
+							<button type="submit" name="create-blog" class="btn btn-primary">Créer mon blog</button>
 						</div>
 					</form>
 				</div>
@@ -144,4 +144,7 @@
 		</div>
 
 	</body>
+		<?php
+        require_once('../_footer/footer.php');
+        ?>
 </html>

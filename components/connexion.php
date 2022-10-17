@@ -54,5 +54,7 @@
 			</div>
 		</div>
 	</body>
-	
+	<?php
+        require_once('../views/_footer/footer.php');
+        ?>
 </html>

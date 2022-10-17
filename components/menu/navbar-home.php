@@ -6,7 +6,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-<ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto">
             <?php
                 if (!isset($_SESSION['id'])) {
                     // ...
