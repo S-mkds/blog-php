@@ -33,8 +33,8 @@
 			require_once('../../components/menu/navbar.php');
 		?>
 		<div class="container">
-			<div class="row">
-				<div class="col-12">
+			<div class="row" style="gap: 1rem">
+				<div class="col-12 ">
 					<h1>Membres</h1>
 				</div>
 				<?php
@@ -52,7 +52,7 @@
 				<div class="col-3">
 					<div><?= $rm['pseudo'] ?></div>
 					<div>
-						<img src="<?= $chemin_avatar ?>" style="width: 7rem" class="profil__avatar"/>
+						<img src="<?= $chemin_avatar ?>" style="width: 10rem" class="profil__avatar"/>
 					</div>
 					<div>
 						<a href="voir-profil.php?id=<?= $rm['id'] ?>">Voir profil</a>

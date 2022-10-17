@@ -66,6 +66,8 @@
 								$nb_commentaire = $req_nb_commentaire['NbCommentaire'];
 								
 						?>
+
+					
 						<a href="topic.php?id=<?= $rlt['id'] ?>" class="list__topic__link">
 							<div class="list__topic__sujet">
 								<div><?= $rlt['titre'] ?></div>
@@ -75,10 +77,12 @@
 									<div>Le <?= date_format(date_create($rlt['date_creation']), 'd/m/Y à H:i') ?></div>
 								</div>
 							</div>
-						</a>
+							</a>
 						<?php		
 							}
-			 			?>
+						?>
+					
+
 					</div>
 				</div>
 			</div>

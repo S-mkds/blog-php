@@ -32,7 +32,7 @@
 						<h1 class="forum__h1">Forum</h1>
 						<div class="forum__body__btn">
 							<a href="creer-topic.php" class="forum__btn__create">
-								<i class="bi bi-plus btn__create"></i> Créer un topic
+								<i class="bi bi-plus btn__create"></i> Crée un sujet
 							</a>
 						</div>
 						<?php
@@ -54,6 +54,7 @@
 									$lib_nb_topic = "Il y a " . $nb_topic . ' topic';
 								}
 						?>
+						<diV class="topics_list" >
 						<a href="liste-topics.php?id=<?= $rf['id'] ?>" class="list__link__forum">
 							<div class="list__cat__forum">
 								<div><?= $rf['titre'] ?></div>
@@ -66,13 +67,14 @@
 						</a>
 						<?php		
 							}
-				 		?>
+						?>
+						
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<?php	
-			require_once('../_footer/footer.php');
-		?>
+
 	</body>
+
 </html>
