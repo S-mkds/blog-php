@@ -17,8 +17,10 @@ RewriteRule ^topic/([0-9]+)/([0-9]+)$ $topic?id_forum=$1&id_topic=$2
 RewriteRule ^forum/([0-9]+)/([0-9]+)$ _forum/topic?id_forum=$1&id_topic=$2 [L]
 
 # Règle d'accès au blog
-RewriteRule ^blog$ blog-views/blog
-
+RewriteRule ^blog$ views/blog/
+RewriteRule ^article/([0-9]+)$ $article?id=$1
+RewriteRule ^article/([0-9]+)/([0-9]+)$ $article?id_blog=$1&id_article=$2
+RewriteRule ^blog/([0-9]+)/([0-9]+)$ _blog/article?id_blog=$1&id_article=$2 [L]
 # Insérer le fuseau horaire
 SetEnv TZ Europe/Paris 
 
